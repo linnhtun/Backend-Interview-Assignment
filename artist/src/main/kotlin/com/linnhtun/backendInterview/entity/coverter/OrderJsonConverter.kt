@@ -27,7 +27,7 @@ class OrderJsonConverter : AttributeConverter<Order, String> {
 
     override fun convertToEntityAttribute(dbData: String?): Order? {
         return try {
-            this.objectMapper?.readValue(dbData, Order::class.java)
+            dbData?.let { this.objectMapper?.readValue(dbData, Order::class.java) }
         } catch (ex: IOException) {
             null
         }
