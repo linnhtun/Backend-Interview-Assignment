@@ -1,0 +1,72 @@
+version: "3.3"
+services:
+  mysql:
+    image: mysql:5.7
+    restart: unless-stopped
+    command: --max_allowed_packet=128M
+    networks:
+      - db
+    environment:
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - 13306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+
+  api-gateway:
+    image: gradle:jdk11
+    restart: unless-stopped
+    networks:
+      - app
+    depends_on:
+      - mysql
+    volumes:
+      - ../api-gateway:/home/gradle/project
+    ports:
+      - 8090:8080
+    working_dir: /home/gradle/project
+    command: ["sh", "run.sh"]
+
+  user:
+    image: gradle:jdk11
+    restart: unless-stopped
+    networks:
+      - db
+      - app
+    depends_on:
+      - mysql
+    volumes:
+      - ../user:/home/gradle/project
+    working_dir: /home/gradle/project
+    command: ["sh", "run.sh"]
+
+  artist:
+    image: gradle:jdk11
+    restart: unless-stopped
+    networks:
+      - db
+      - app
+    depends_on:
+      - mysql
+    volumes:
+      - ../artist:/home/gradle/project
+    working_dir: /home/gradle/project
+    command: ["sh", "run.sh"]
+
+  order:
+    image: gradle:jdk11
+    restart: unless-stopped
+    networks:
+      - db
+      - app
+    depends_on:
+      - mysql
+    volumes:
+      - ../order:/home/gradle/project
+    working_dir: /home/gradle/project
+    command: ["sh", "run.sh"]
+
+networks:
+  db:
+  app:
