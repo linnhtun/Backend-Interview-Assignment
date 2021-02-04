@@ -3,9 +3,7 @@ package com.linnhtun.backendInterview.entity.coverter
 import javax.persistence.AttributeConverter
 import javax.persistence.Converter
 import java.io.IOException
-
 import com.fasterxml.jackson.core.JsonProcessingException
-
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.linnhtun.backendInterview.entity.Order
 import org.springframework.beans.factory.annotation.Autowired

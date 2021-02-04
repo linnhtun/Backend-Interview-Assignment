@@ -11,7 +11,6 @@ import java.time.LocalDateTime
 import kotlin.collections.MutableIterable
 import java.util.Optional
 import javax.validation.Valid
-import com.fasterxml.jackson.databind.ObjectMapper
 
 @RestController
 @Validated

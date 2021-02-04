@@ -7,7 +7,7 @@ import javax.persistence.*
 @Entity(name = "order_items")
 @EntityListeners(OrderItemListener::class)
 final data class OrderItem(
-    @Column(name = "art_id") val artId: String?,
+    @Column(name = "art_id") val artId: Long?,
     @Column(name = "art_name") val artName: String?
 ) {
     @Id

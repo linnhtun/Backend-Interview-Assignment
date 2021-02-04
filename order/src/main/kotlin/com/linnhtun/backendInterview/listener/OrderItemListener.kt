@@ -26,7 +26,7 @@ class OrderItemListener {
         val headers = HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON);
         val request = HttpEntity<Order>(orderItem.order, headers);
-        val boughtArtUri = orderItem?.artId?.let { artistProperties?.boughtArtUri?.replace(":artId", it) }
+        val boughtArtUri = orderItem?.artId?.let { artistProperties?.boughtArtUri?.replace(":artId", it.toString()) }
 
         if (boughtArtUri !== null) {
             val response: ResponseEntity<ArtistResponse>? =
